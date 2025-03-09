@@ -1,57 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-const fundraisingsData: {
-  id: string;
-  title: string;
-  description: string;
-  goal: number;
-  current: number;
-  category: string;
-}[] = [
-  {
-    id: "1",
-    title: "GetToTheChain",
-    description: "Ayuda a nuestro videojuego a llegar a la blockchain",
-    goal: 100,
-    current: 50,
-    category: "Proyecto",
-  },
-  {
-    id: "2",
-    title: "SaveTheOcean",
-    description: "Campaña para limpiar los océanos",
-    goal: 500,
-    current: 200,
-    category: "Medio Ambiente",
-  },
-  {
-    id: "3",
-    title: "EducationForAll",
-    description: "Proveer educación a niños en áreas rurales",
-    goal: 1000,
-    current: 750,
-    category: "Educación",
-  },
-  {
-    id: "4",
-    title: "HealthcareHeroes",
-    description: "Apoyo a trabajadores de la salud durante la pandemia",
-    goal: 2000,
-    current: 1500,
-    category: "Salud",
-  },
-  {
-    id: "5",
-    title: "AnimalRescue",
-    description: "Rescate y cuidado de animales abandonados",
-    goal: 300,
-    current: 100,
-    category: "Animales",
-  },
-];
+import { fundraisingsData } from "./data/fundraisings.data";
 
 const FundraisingsMainPage: React.FC = () => {
   const router = useRouter();
