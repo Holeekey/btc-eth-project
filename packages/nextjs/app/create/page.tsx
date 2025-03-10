@@ -1,42 +1,73 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAccount } from "wagmi";
-import { InputBase } from "~~/components/scaffold-eth";
+import { EtherInput, InputBase } from "~~/components/scaffold-eth";
 
 const Create = () => {
   const [title, setTitle] = useState("");
+  const [user, setUser] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [goal, setGoal] = useState("");
-  const [error, setError] = useState("");
 
   const { isConnected } = useAccount();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isConnected) {
-      setError("Por favor, conecta tu wallet para crear una recaudación.");
-      toast.error(error);
+      toast.error("Por favor, conecta tu wallet para crear una recaudación.");
       return;
     }
-    console.log({ title, description, category, goal });
-    console.log("isConnected", isConnected);
-    setError("");
+    // VALIDACIONES DEL TITULO
+    if (!title) {
+      toast.error("Por favor, introduce un título.");
+      return;
+    }
+    if (title.length > 30) {
+      toast.error("El título no puede tener más de 30 caracteres.");
+      return;
+    }
+    // VALIDACIONES DEL USUARIO
+    if (!user) {
+      toast.error("Por favor, introduce un alias de creador.");
+      return;
+    }
+    if (user.length > 15) {
+      toast.error("El alias no puede tener más de 15 caracteres.");
+      return;
+    }
+    // VALIDACIONES DE LA DESCRIPCION
+    if (!description) {
+      toast.error("Por favor, introduce una descripción.");
+      return;
+    }
+    if (description.length > 100) {
+      toast.error("La descripción no puede tener más de 100 caracteres.");
+      return;
+    }
+    // VALIDACIONES DE LA CATEGORIA
+    if (!category) {
+      toast.error("Por favor, introduce una categoría.");
+      return;
+    }
+    if (category.length > 15) {
+      toast.error("La categoría no puede tener más de 20 caracteres.");
+      return;
+    }
+    // VALIDACIONES DE LA META
+    if (parseFloat(goal) <= 0) {
+      toast.error("La meta de recaudación debe ser mayor a cero (0)");
+      return;
+    }
     toast.success("Recaudación creada con éxito!");
   };
 
-  useEffect(() => {
-    if (isConnected) {
-      setError("");
-    }
-  }, [isConnected]);
-
   return (
     <div className="flex items-center flex-col flex-grow pt-10">
-      <ToastContainer aria-label={"ola"} />
+      <ToastContainer aria-label={""} />
       <h2 className="text-center">
         <span className="block text-4xl font-bold">Crear recaudación</span>
       </h2>
@@ -46,6 +77,12 @@ const Create = () => {
             Título de la recaudación
           </label>
           <InputBase name="title" value={title} onChange={setTitle} />
+        </div>
+        <div className="mb-4">
+          <label className="block text-white-700 text-sm font-bold mb-2" htmlFor="title">
+            Alias del creador
+          </label>
+          <InputBase name="title" value={user} onChange={setUser} />
         </div>
         <div className="mb-4">
           <label className="block text-white-700 text-sm font-bold mb-2" htmlFor="description">
@@ -61,9 +98,9 @@ const Create = () => {
         </div>
         <div className="mb-4">
           <label className="block text-white-700 text-sm font-bold mb-2" htmlFor="goal">
-            Meta de recaudación
+            Meta de recaudación (ETH)
           </label>
-          <InputBase name="goal" value={goal} onChange={setGoal} />
+          <EtherInput name="goal" value={goal} onChange={setGoal} />
         </div>
         <div className="flex items-center justify-center">
           <button
