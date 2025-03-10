@@ -9,7 +9,8 @@ import { EtherInput, InputBase } from "~~/components/scaffold-eth";
 const Create = () => {
   const [title, setTitle] = useState("");
   const [user, setUser] = useState("");
-  const [description, setDescription] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
+  const [longDescription, setLongDescription] = useState("");
   const [category, setCategory] = useState("");
   const [goal, setGoal] = useState("");
 
@@ -39,12 +40,21 @@ const Create = () => {
       toast.error("El alias no puede tener más de 15 caracteres.");
       return;
     }
-    // VALIDACIONES DE LA DESCRIPCION
-    if (!description) {
-      toast.error("Por favor, introduce una descripción.");
+    // VALIDACIONES DE LA DESCRIPCION CORTA
+    if (!shortDescription) {
+      toast.error("Por favor, introduce una descripción corta.");
       return;
     }
-    if (description.length > 100) {
+    if (shortDescription.length > 70) {
+      toast.error("La descripción no puede tener más de 50 caracteres.");
+      return;
+    }
+    // VALIDACIONES DE LA DESCRIPCION COMPLETA
+    if (!longDescription) {
+      toast.error("Por favor, introduce una descripción completa.");
+      return;
+    }
+    if (longDescription.length > 200) {
       toast.error("La descripción no puede tener más de 100 caracteres.");
       return;
     }
@@ -86,9 +96,15 @@ const Create = () => {
         </div>
         <div className="mb-4">
           <label className="block text-white-700 text-sm font-bold mb-2" htmlFor="description">
-            Descripción
+            Descripción corta
           </label>
-          <InputBase name="description" value={description} onChange={setDescription} />
+          <InputBase name="description" value={shortDescription} onChange={setShortDescription} />
+        </div>
+        <div className="mb-4">
+          <label className="block text-white-700 text-sm font-bold mb-2" htmlFor="description">
+            Descripción completa
+          </label>
+          <InputBase name="description" value={longDescription} onChange={setLongDescription} />
         </div>
         <div className="mb-4">
           <label className="block text-white-700 text-sm font-bold mb-2" htmlFor="category">
