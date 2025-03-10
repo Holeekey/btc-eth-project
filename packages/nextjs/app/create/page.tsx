@@ -1,6 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAccount } from "wagmi";
 import { InputBase } from "~~/components/scaffold-eth";
 
 const Create = () => {
@@ -8,15 +11,32 @@ const Create = () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [goal, setGoal] = useState("");
+  const [error, setError] = useState("");
+
+  const { isConnected } = useAccount();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí puedes manejar el envío del formulario, por ejemplo, enviando los datos a una API
+    if (!isConnected) {
+      setError("Por favor, conecta tu wallet para crear una recaudación.");
+      toast.error(error);
+      return;
+    }
     console.log({ title, description, category, goal });
+    console.log("isConnected", isConnected);
+    setError("");
+    toast.success("Recaudación creada con éxito!");
   };
+
+  useEffect(() => {
+    if (isConnected) {
+      setError("");
+    }
+  }, [isConnected]);
 
   return (
     <div className="flex items-center flex-col flex-grow pt-10">
+      <ToastContainer aria-label={"ola"} />
       <h2 className="text-center">
         <span className="block text-4xl font-bold">Crear recaudación</span>
       </h2>
