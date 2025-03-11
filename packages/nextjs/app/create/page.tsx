@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAccount } from "wagmi";
 import { EtherInput, InputBase } from "~~/components/scaffold-eth";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 const Create = () => {
   const [title, setTitle] = useState("");
@@ -14,7 +15,9 @@ const Create = () => {
   const [category, setCategory] = useState("");
   const [goal, setGoal] = useState("");
 
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
+
+  const { writeContractAsync } = useScaffoldWriteContract({ contractName: "CreateFunding" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,7 +75,18 @@ const Create = () => {
       toast.error("La meta de recaudación debe ser mayor a cero (0)");
       return;
     }
-    toast.success("Recaudación creada con éxito!");
+
+    writeContractAsync({
+      functionName: "createFunding",
+      args: [title, user, shortDescription, longDescription, category, BigInt(parseInt(goal)), address],
+    })
+      .then(() => {
+        toast.success("Recaudación creada con éxito!");
+      })
+      .catch(e => {
+        toast.error("Error al crear la recaudación.");
+        console.error(e);
+      });
   };
 
   return (

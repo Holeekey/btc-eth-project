@@ -31,6 +31,8 @@ const deployCreateFunding: DeployFunction = async function (hre: HardhatRuntimeE
     autoMine: true,
   });
 
+  console.log("CreateFunding deployed");
+
   // Get the deployed contract to interact with it after deploying.
   /*  const yourContract = await hre.ethers.getContract<Contract>("YourContract", deployer);
   console.log("👋 Initial greeting:", await yourContract.greeting()); */
