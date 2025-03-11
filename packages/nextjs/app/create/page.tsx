@@ -76,9 +76,11 @@ const Create = () => {
       return;
     }
 
+    const weiGoal = BigInt(parseFloat(goal) * 10 ** 18);
+
     writeContractAsync({
       functionName: "createFunding",
-      args: [title, user, shortDescription, longDescription, category, BigInt(parseInt(goal)), address],
+      args: [title, user, shortDescription, longDescription, category, weiGoal, address],
     })
       .then(() => {
         toast.success("Recaudación creada con éxito!");

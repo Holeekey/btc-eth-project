@@ -1,13 +1,16 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { fundraisingsData } from "./data/fundraisings.data";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 const FundraisingsMainPage: React.FC = () => {
   const router = useRouter();
 
   const { data } = useScaffoldReadContract({ contractName: "CreateFunding", functionName: "retrieveAllFundings" });
+
+  const weiToEth = (wei: bigint) => {
+    return parseFloat(wei.toString()) / 10 ** 18;
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -26,19 +29,19 @@ const FundraisingsMainPage: React.FC = () => {
                   <div className="flex mb-2 items-center justify-between">
                     <div>
                       <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 text-[10px]">
-                        Recaudado: {fundraising.totalEarned.toString()} ETH
+                        Recaudado: {weiToEth(fundraising.totalEarned).toString()} ETH
                       </span>
                     </div>
                     <div className="text-right">
                       <span className="text-xs font-semibold inline-block text-blue-600">
-                        {fundraising.goal.toString()} ETH
+                        {weiToEth(fundraising.goal).toString()} ETH
                       </span>
                     </div>
                   </div>
                   <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200">
                     <div
                       style={{
-                        width: `${(parseInt(fundraising.totalEarned.toString()) || 0 / parseInt(fundraising.goal.toString()) || 1) * 100}%`,
+                        width: `${(parseInt(fundraising.totalEarned.toString()) / parseInt(fundraising.goal.toString())) * 100}%`,
                       }}
                       className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
                     ></div>
