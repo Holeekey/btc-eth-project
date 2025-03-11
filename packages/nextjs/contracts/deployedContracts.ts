@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     CreateFunding: {
-      address: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
       abi: [
         {
           inputs: [
@@ -42,7 +42,12 @@ const deployedContracts = {
             },
             {
               internalType: "string",
-              name: "description",
+              name: "shortDescription",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "longDescription",
               type: "string",
             },
             {
@@ -67,22 +72,10 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [],
-          name: "deposit",
-          outputs: [],
-          stateMutability: "payable",
-          type: "function",
-        },
-        {
           inputs: [
             {
               internalType: "uint256",
               name: "id",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "amount",
               type: "uint256",
             },
           ],
@@ -118,7 +111,12 @@ const deployedContracts = {
             },
             {
               internalType: "string",
-              name: "description",
+              name: "shortDescription",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "longDescription",
               type: "string",
             },
             {
@@ -150,6 +148,11 @@ const deployedContracts = {
               internalType: "uint256",
               name: "timestamp",
               type: "uint256",
+            },
+            {
+              internalType: "bool",
+              name: "isFundingComplete",
+              type: "bool",
             },
           ],
           stateMutability: "view",
@@ -182,7 +185,12 @@ const deployedContracts = {
             },
             {
               internalType: "string",
-              name: "description",
+              name: "shortDescription",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "longDescription",
               type: "string",
             },
             {
@@ -214,6 +222,11 @@ const deployedContracts = {
               internalType: "uint256",
               name: "timestamp",
               type: "uint256",
+            },
+            {
+              internalType: "bool",
+              name: "isFundingComplete",
+              type: "bool",
             },
           ],
           stateMutability: "view",
@@ -255,7 +268,12 @@ const deployedContracts = {
                 },
                 {
                   internalType: "string",
-                  name: "description",
+                  name: "shortDescription",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "longDescription",
                   type: "string",
                 },
                 {
@@ -287,6 +305,11 @@ const deployedContracts = {
                   internalType: "uint256",
                   name: "timestamp",
                   type: "uint256",
+                },
+                {
+                  internalType: "bool",
+                  name: "isFundingComplete",
+                  type: "bool",
                 },
               ],
               internalType: "struct CreateFunding.Funding[]",
@@ -326,7 +349,12 @@ const deployedContracts = {
                 },
                 {
                   internalType: "string",
-                  name: "description",
+                  name: "shortDescription",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "longDescription",
                   type: "string",
                 },
                 {
@@ -358,6 +386,11 @@ const deployedContracts = {
                   internalType: "uint256",
                   name: "timestamp",
                   type: "uint256",
+                },
+                {
+                  internalType: "bool",
+                  name: "isFundingComplete",
+                  type: "bool",
                 },
               ],
               internalType: "struct CreateFunding.Funding",
