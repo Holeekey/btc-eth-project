@@ -37,6 +37,7 @@ contract CreateFunding {
         require(bytes(category).length <= 15, "Category cannot be longer than 15 characters");
         require(goal > 0, "Goal must be greater than zero");
         require(recipient != address(0), "Recipient address is not valid");
+        require(recipient != address(this), "Recipient cannot be the contract itself");
         Funding memory newFunding = Funding(nextId, title, user, shortDescription, longDescription, category, goal, 0, msg.sender, recipient, block.timestamp, false);
         fundings[nextId] = newFunding;
         fundingList.push(newFunding);
@@ -62,6 +63,8 @@ contract CreateFunding {
         if (fundings[id].totalEarned == fundings[id].goal){
             fundings[id].isFundingComplete = true;
             fundingList[id-1].isFundingComplete = true;
+            address payable recipient = payable(fundings[id].recipient);
+            recipient.transfer(fundings[id].totalEarned);
         } 
     }
 }
