@@ -21,7 +21,7 @@ const FundraisingsMainPage: React.FC = () => {
           <div key={fundraising.id} className="bg-base-100 shadow-md rounded-lg p-6 flex flex-col justify-between">
             <div>
               <h2 className="text-2xl font-bold mb-2">{fundraising.title}</h2>
-              <p className="text-white-700 mb-4">{fundraising.longDescription}</p>
+              <p className="text-white-700 mb-4">{fundraising.shortDescription}</p>
             </div>
             <div>
               <div className="mb-4">
