@@ -22,9 +22,6 @@ contract CreateFunding {
     mapping(uint => Funding) public fundings;
     Funding[] public fundingList;
     uint public nextId = 1;
-    /*function deposit() public payable {
-        balances[msg.sender] += msg.value;
-    }*/
 
     //CREAR FUNDING
     function createFunding(string memory title, string memory user, string memory shortDescription, string memory longDescription, string memory category, uint goal, address recipient) public {
@@ -57,13 +54,14 @@ contract CreateFunding {
 
     //PAGAR FUNDING
     function fundFunding(uint id/*,uint amount*/) public payable {
-        //require(amount > 0, "Amount must be greater than zero");
-        //require(balances[msg.sender] >= amount, "Your balance must be greater than the amount");
-        require(fundings[id].totalEarned + /*amount*/msg.value <=fundings[id].goal, "Amount must be less than or equal to goal");
-        //balances[msg.sender] -= amount;
-        //balances[fundings[id].recipient] += amount;
+        require(id>0 && id<=fundingList.length, "Enter a valid id");
+        require(fundings[id].totalEarned + msg.value <=fundings[id].goal, "Amount must be less than or equal to goal");
         balances[msg.sender] += msg.value;
-        fundings[id].totalEarned += msg.value/*amount*/;
-        if (fundings[id].totalEarned == fundings[id].goal) fundings[id].isFundingComplete = true;
+        fundings[id].totalEarned += msg.value;
+        fundingList[id-1].totalEarned += msg.value;
+        if (fundings[id].totalEarned == fundings[id].goal){
+            fundings[id].isFundingComplete = true;
+            fundingList[id-1].isFundingComplete = true;
+        } 
     }
 }
