@@ -49,16 +49,16 @@ const Create = () => {
       return;
     }
     if (shortDescription.length > 70) {
-      toast.error("La descripción no puede tener más de 50 caracteres.");
+      toast.error("La descripción corta no puede tener más de 70 caracteres.");
       return;
     }
     // VALIDACIONES DE LA DESCRIPCION COMPLETA
     if (!longDescription) {
-      toast.error("Por favor, introduce una descripción completa.");
+      toast.error("Por favor, introduce una descripción larga.");
       return;
     }
     if (longDescription.length > 200) {
-      toast.error("La descripción no puede tener más de 100 caracteres.");
+      toast.error("La descripción larga no puede tener más de 200 caracteres.");
       return;
     }
     // VALIDACIONES DE LA CATEGORIA
@@ -67,7 +67,7 @@ const Create = () => {
       return;
     }
     if (category.length > 15) {
-      toast.error("La categoría no puede tener más de 20 caracteres.");
+      toast.error("La categoría no puede tener más de 15 caracteres.");
       return;
     }
     // VALIDACIONES DE LA META
