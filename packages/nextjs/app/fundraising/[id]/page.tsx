@@ -161,8 +161,9 @@ export default function FundraisingPage({ params }: { params: { id: string } }) 
         <div style={{ display: "flex", justifyContent: "center", marginTop: "1.5em" }}>
           <button
             style={{ fontSize: "1.5em", width: "6em" }}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className={`${data?.isFundingComplete ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"}   text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
             onClick={handleDonateClick}
+            disabled={data?.isFundingComplete}
           >
             Donar
           </button>
