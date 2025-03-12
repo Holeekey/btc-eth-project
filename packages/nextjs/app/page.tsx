@@ -11,7 +11,7 @@ const Home: NextPage = () => {
         <div className="px-5">
           <h1 className="text-center">
             {/* <span className="block text-2xl mb-2">Welcome to</span> */}
-            <span className="block text-4xl font-bold">FundChain</span>
+            <span className="block text-4xl font-bold">FundingChain</span>
           </h1>
 
           <p className="text-center text-lg">Conecta tu ayuda al cambio. Dona, construye, transforma.</p>
