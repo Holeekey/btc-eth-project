@@ -151,7 +151,7 @@ export default function FundraisingPage({ params }: { params: { id: string } }) 
             <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200">
               <div
                 style={{
-                  width: `${(parseInt((currentFunding ?? 0).toString()) / parseInt(weiToEth(data?.goal as bigint).toString())) * 100}%`,
+                  width: `${(parseFloat((currentFunding ?? 0).toString()) / parseFloat(weiToEth(data?.goal as bigint).toString())) * 100}%`,
                 }}
                 className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
               ></div>

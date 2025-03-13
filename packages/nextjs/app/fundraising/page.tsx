@@ -41,7 +41,7 @@ const FundraisingsMainPage: React.FC = () => {
                   <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200">
                     <div
                       style={{
-                        width: `${(parseInt(fundraising.totalEarned.toString()) / parseInt(fundraising.goal.toString())) * 100}%`,
+                        width: `${(parseFloat(fundraising.totalEarned.toString()) / parseFloat(fundraising.goal.toString())) * 100}%`,
                       }}
                       className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
                     ></div>
