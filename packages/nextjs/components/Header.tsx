@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { hardhat } from "viem/chains";
-import { Bars3Icon, BugAntIcon, MagnifyingGlassIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, HomeIcon, MagnifyingGlassIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick, useTargetNetwork } from "~~/hooks/scaffold-eth";
 
@@ -19,6 +19,7 @@ export const menuLinks: HeaderMenuLink[] = [
   {
     label: "Página principal",
     href: "/",
+    icon: <HomeIcon className="h-4 w-4" />,
   },
   {
     label: "Explorar",
@@ -30,11 +31,11 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/create",
     icon: <RocketLaunchIcon className="h-4 w-4" />,
   },
-  {
+  /* {
     label: "Debug",
     href: "/debug",
     icon: <BugAntIcon className="h-4 w-4" />,
-  },
+  }, */
 ];
 
 export const HeaderMenuLinks = () => {
