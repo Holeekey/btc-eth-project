@@ -7777,7 +7777,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:2.1.1":
+"clsx@npm:2.1.1, clsx@npm:^2.1.1":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: acd3e1ab9d8a433ecb3cc2f6a05ab95fe50b4a3cfc5ba47abb6cbf3754585fcb87b84e90c822a1f256c4198e3b41c7f6c391577ffc8678ad587fc0976b24fd57
@@ -15236,6 +15236,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-toastify@npm:^11.0.5":
+  version: 11.0.5
+  resolution: "react-toastify@npm:11.0.5"
+  dependencies:
+    clsx: ^2.1.1
+  peerDependencies:
+    react: ^18 || ^19
+    react-dom: ^18 || ^19
+  checksum: e2150aabe6a2b70d1d06bd6d4ef14d14e7ff38703980339660a34ef2251df206c4850dbf52a483aacf22265b41a8af0e27210ce20bf10ea7df4600e492a58352
+  languageName: node
+  linkType: hard
+
 "react@npm:~18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
@@ -15776,6 +15788,7 @@ __metadata:
   dependencies:
     husky: ~9.1.6
     lint-staged: ~13.2.2
+    react-toastify: ^11.0.5
   languageName: unknown
   linkType: soft
 
