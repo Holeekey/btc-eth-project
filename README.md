@@ -1,80 +1,80 @@
-# 🏗 Scaffold-ETH 2
+# FundingChain
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+🧪 Es una DAPP enfocada en la recaudación de fondos y financiamiento de proyectos de software y distintas causas.
+El usuario, a través de una wallet, podrá crear y donar a las recaudaciones activas. El movimiento de los fondos es completamente transparente gracias a la naturaleza de la Blockchain de Ethereum.
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+## Requisitos
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
-
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
-
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
-
-## Requirements
-
-Before you begin, you need to install the following tools:
+Antes de comenzar, necesitas instalar las siguientes herramientas:
 
 - [Node (>= v20.18.3)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
+- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) o [v2+](https://yarnpkg.com/getting-started/install))
 - [Git](https://git-scm.com/downloads)
 
-## Quickstart
+## Correr la aplicación en local
 
-To get started with Scaffold-ETH 2, follow the steps below:
+Para comenzar a utilizar la aplicación, sigue los pasos a continuación:
 
-1. Install dependencies if it was skipped in CLI:
+1. Instala las dependencias:
 
 ```
-cd my-dapp-example
 yarn install
 ```
 
-2. Run a local network in the first terminal:
+2. Ejecuta una red local en el primer terminal:
 
 ```
 yarn chain
 ```
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `packages/hardhat/hardhat.config.ts`.
+Este comando inicia una red local de Ethereum usando Hardhat. La red se ejecuta en tu máquina local y puede ser utilizada para pruebas y desarrollo. Puedes personalizar la configuración de la red en `packages/hardhat/hardhat.config.ts`.
 
-3. On a second terminal, deploy the test contract:
+3. En un segundo terminal, despliega el contrato de prueba:
 
 ```
-yarn deploy
+yarn deploy --tags CreateFunding
 ```
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
+Este comando despliega el smart contract que se encarga de gestionar las recaudaciones de fondos.
 
-4. On a third terminal, start your NextJS app:
+4. Inicia tu aplicación NextJS:
 
 ```
 yarn start
 ```
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+Visita la aplicación en: `http://localhost:3000`.
 
-Run smart contract test with `yarn hardhat:test`
+## Funcionalidades
 
-- Edit your smart contracts in `packages/hardhat/contracts`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/hardhat/deploy`
+Esta aplicación forma parte de un MVP, por lo cual se implementaron las siguientes vistas y funcionalidades:
 
+### Landing Page
 
-## Documentation
+Página principal del proyecto, de aquí se puede navegar a la vista de crear recaudación y explorar recaudaciones
 
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
+![Landing Page](/docs/langing_page.png)
 
-To know more about its features, check out our [website](https://scaffoldeth.io).
+### Crear Recaudación
 
-## Contributing to Scaffold-ETH 2
+Introduce los datos requeridos para lanzar tu propia recaudación. **Recuerda conectar tu billetera** y conseguir fondos del faucet para pagar el gas requerido para hacer la operación con el contrato.
 
-We welcome contributions to Scaffold-ETH 2!
+![Crear Recaudación](/docs/create.png)
 
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+### Explorar Recaudaciones
+
+En esta vista puedes navegar por las distintas recaudaciones creadas y entrar en el detalle de cada una para donar.
+
+![Ver Recaudaciones](/docs/explore.png)
+
+### Detalles de Recaudación
+
+Aquí se puede ver una descripción más detallada del proyecto que dará más información y contexto a sus posibles donantes.
+
+![Detalles de Recaudación](/docs/fundraising_detail.png)
+
+### Donar a recaudación
+
+Para ayudar a la causa puedes donar una cierta cantidad de ETH que no exceda la meta de recaudación. Una vez que sea alcanzada la meta, los fondos serán transferidos en su totalidad a la cuenta del creador de la recaudación.
+
+![Donar a recaudación](/docs/donate.png)
