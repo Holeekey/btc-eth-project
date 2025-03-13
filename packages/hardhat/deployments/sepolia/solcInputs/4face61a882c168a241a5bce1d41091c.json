@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/CreateFunding.sol": {
+      "content": "// SPDX-License-Identifier: GPL-3.0\r\npragma solidity >=0.8.2 <0.9.0;\r\n\r\ncontract CreateFunding {\r\n    \r\n    // ESTRUCTURAS\r\n    struct Funding{\r\n        uint id;\r\n        string title;\r\n        string user;\r\n        string shortDescription;\r\n        string longDescription;\r\n        string category;\r\n        uint goal;\r\n        uint totalEarned;\r\n        address creator;\r\n        address recipient;\r\n        uint timestamp;\r\n        bool isFundingComplete;\r\n    }\r\n    mapping(address => uint) public balances;\r\n    mapping(uint => Funding) public fundings;\r\n    Funding[] public fundingList;\r\n    uint public nextId = 1;\r\n\r\n    //CREAR FUNDING\r\n    function createFunding(string memory title, string memory user, string memory shortDescription, string memory longDescription, string memory category, uint goal, address recipient) public {\r\n        require(bytes(title).length > 0, \"Title cannot be empty\");\r\n        require(bytes(title).length <= 30, \"Title cannot be longer than 30 characters\");\r\n        require(bytes(user).length > 0, \"User cannot be empty\");\r\n        require(bytes(user).length <= 15, \"User cannot be longer than 15 characters\");\r\n        require(bytes(shortDescription).length > 0, \"Short description cannot be empty\");\r\n        require(bytes(shortDescription).length <= 70, \"Short description cannot be longer than 70 characters\");\r\n        require(bytes(longDescription).length > 0, \"Long description cannot be empty\");\r\n        require(bytes(longDescription).length <= 200, \"Long description cannot be longer than 200 characters\");\r\n        require(bytes(category).length > 0, \"Category cannot be empty\");\r\n        require(bytes(category).length <= 15, \"Category cannot be longer than 15 characters\");\r\n        require(goal > 0, \"Goal must be greater than zero\");\r\n        require(recipient != address(0), \"Recipient address is not valid\");\r\n        require(recipient != address(this), \"Recipient cannot be the contract itself\");\r\n        Funding memory newFunding = Funding(nextId, title, user, shortDescription, longDescription, category, goal, 0, msg.sender, recipient, block.timestamp, false);\r\n        fundings[nextId] = newFunding;\r\n        fundingList.push(newFunding);\r\n        nextId++;\r\n    }\r\n\r\n    // VISUALIZAR FUNDINGS\r\n    function retrieveById(uint id) public view returns (Funding memory) {\r\n        return fundings[id];\r\n    }\r\n\r\n    function retrieveAllFundings() public view returns (Funding[] memory) {\r\n        return fundingList;\r\n    }\r\n\r\n    //PAGAR FUNDING\r\n    function fundFunding(uint id/*,uint amount*/) public payable {\r\n        require(id>0 && id<=fundingList.length, \"Enter a valid id\");\r\n        require(fundings[id].totalEarned + msg.value <=fundings[id].goal, \"Amount must be less than or equal to goal\");\r\n        balances[msg.sender] += msg.value;\r\n        fundings[id].totalEarned += msg.value;\r\n        fundingList[id-1].totalEarned += msg.value;\r\n        if (fundings[id].totalEarned == fundings[id].goal){\r\n            fundings[id].isFundingComplete = true;\r\n            fundingList[id-1].isFundingComplete = true;\r\n            address payable recipient = payable(fundings[id].recipient);\r\n            recipient.transfer(fundings[id].totalEarned);\r\n        } \r\n    }\r\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "paris",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
